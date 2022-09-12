@@ -1,0 +1,10 @@
+require "./spec_helper"
+
+describe Kana do
+<% @map.each do |entry| %>
+    it "converts between '<%= entry[0] %>' and '<%= entry[1] %>'" do
+        Kana.to_katakana("<%= entry[0] %>").should eq "<%= entry[1] %>"
+        Kana.to_hiragana("<%= entry[1] %>").should eq "<%= entry[0] %>"
+    end
+<% end %>
+end

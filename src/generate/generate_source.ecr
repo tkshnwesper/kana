@@ -1,0 +1,23 @@
+module Kana
+  VERSION = "0.1.0"
+
+  HIRAGANA_TO_KATAKANA_HASH = {
+    <% @map.each do |entry| %>
+        '<%= entry[0] %>' => '<%= entry[1] %>',
+    <% end %>
+  }
+
+  KATAKANA_TO_HIRAGANA_HASH = HIRAGANA_TO_KATAKANA_HASH.invert
+
+  def self.to_hiragana(text : String)
+    text.chars.join do |char|
+        KATAKANA_TO_HIRAGANA_HASH.fetch(char, char)
+    end
+  end
+
+  def self.to_katakana(text : String)
+    text.chars.join do |char|
+        HIRAGANA_TO_KATAKANA_HASH.fetch(char, char)
+    end
+  end
+end
